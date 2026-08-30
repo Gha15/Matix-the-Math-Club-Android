@@ -1,4 +1,46 @@
-# Project exclude paths
-/.gradle/
-/app/
-/gradle/
+# ---------------------------------------------------------------------------
+# Matix the Math Club - Android
+# NOTE: the old .gitignore excluded /app/ and /gradle/, which meant the entire
+# app module and the Gradle wrapper were never committed. Fixed below.
+# ---------------------------------------------------------------------------
+
+# Gradle
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# Local / machine specific (contains an absolute SDK path)
+local.properties
+
+# Android Studio / IntelliJ
+.idea/
+*.iml
+.cxx/
+captures/
+
+# Build outputs (these were previously committed)
+*.apk
+*.aab
+*.ap_
+*.dex
+*.class
+/app/release/
+/app/debug/
+output-metadata.json
+
+# Signing - never commit keystores or credentials
+*.jks
+*.keystore
+keystore.properties
+
+# Generated: app.html is copied here from the project root by the
+# `syncWebApp` Gradle task. Edit the ROOT app.html, not this copy.
+/app/src/main/assets/app.html
+
+# Logs / OS noise
+*.log
+.DS_Store
+Thumbs.db
+
+# Tooling
+.qodo/
