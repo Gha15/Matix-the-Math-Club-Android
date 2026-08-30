@@ -1,122 +1,18 @@
-<<<<<<< HEAD
-# Matix the Math Club — Android
+## Download
+[Download here](https://bzl2ejd7c5wn5h9j.public.blob.vercel-storage.com/app-release.apk)
 
-The Matix club workspace, wrapped in a native Android shell. The entire app is a
-single self-contained file, **`app.html`**, which lives at the **root of this
-project** and is served to a `WebView`.
+## Steps After Download
 
----
+1. **Extract the files** out of the zip folder.
+2. **Click on the `.apk` file**.
+3. **Allow the source (if prompted):** If it says *"this source is not allowed"*, click the **Settings** button, find your files app in the list, and toggle the switch to turn it on.
+4. **Disable Auto Blocker (Samsung devices):** If it says you have to turn off Auto Blocker:
+   * Go to **Settings** -> **Security and Privacy** -> **Auto Blocker**.
+   * Turn it **off**.
+   * Go back to your files app, click the `.apk` file again, and click **Install**.
+5. **Handle Security Warnings:** If it says *"this app is not secure"*, follow one of these two cases:
+   * **Case 1:** If it shows a *Scan* and *Do not scan* button, click **Scan** and wait a moment. Once it says *App installed*, you can click **Open**.
+   * **Case 2 (More common):** If it says *"this app could not be installed because Play Protect could not scan this app"*, click on **Learn more** (or the downward arrow icon to expand the menu), then click **Install anyway**. Once it says *App installed*, click **Open**.
 
-## Project layout
-
-```
-Matix the Math Club Android/
-├── app.html                  ← THE APP. Single source of truth. Edit this.
-├── build.gradle.kts
-├── settings.gradle.kts
-├── gradle.properties
-├── gradlew  /  gradlew.bat    ← Gradle wrapper scripts
-├── local.properties.example   ← copy to local.properties, add your SDK path
-├── gradle/wrapper/
-└── app/
-    ├── build.gradle.kts       ← contains the `syncWebApp` task
-    ├── proguard-rules.pro
-    └── src/main/
-        ├── AndroidManifest.xml
-        ├── assets/app.html    ← GENERATED copy, git-ignored. Do not edit.
-        ├── java/club/matix/mathclub/MainActivity.kt
-        └── res/
-```
-
-### How `app.html` reaches the app
-
-1. You edit **`/app.html`** at the project root.
-2. The `syncWebApp` Gradle task copies it to `app/src/main/assets/app.html`.
-   It is wired to `preBuild`, so it runs automatically on every build.
-3. `WebViewAssetLoader` serves that folder, and `MainActivity` loads
-   `https://appassets.androidplatform.net/assets/app.html`.
-
-You never edit two copies. The copy under `assets/` is generated and ignored by
-git.
-
----
-
-## Building
-
-```bash
-cp local.properties.example local.properties   # then set sdk.dir
-./gradlew assembleDebug                        # APK in app/build/outputs/apk/debug/
-./gradlew installDebug                         # build + install on a device
-./gradlew clean
-```
-
-Requires **JDK 17+** and the Android SDK (compileSdk 34).
-
----
-
-## Startup flow
-
-Modelled on [labs.google](https://labs.google/) — the page loads first, and only
-then does it ask who you are.
-
-```
-1. Loading screen   #mxBoot     animated wordmark + progress bar
-2. Welcome screen   #gateWelcome  what Matix is, feature cards, one CTA
-3. Sign in          #gateAuth     username + password
-4. App              #app
-```
-
-If you are already signed in, steps 2 and 3 are skipped: the loading screen goes
-straight into the app, and the session is validated in the background so a
-"sign out of all devices" from another phone still kicks you out.
-
----
-
-## Owner-managed content
-
-The loading and welcome screens are **not hard-coded** — the owner writes them
-from inside the app, and every member sees the result.
-
-**Where:** sidebar → **✎ Welcome screen** (owner only), or the ✎ button on the
-welcome screen itself.
-
-**Editable:** wordmark, loading tagline, loading label, eyebrow chip, heading,
-intro paragraph, button text, badge text, and up to six feature cards
-(icon + title + body).
-
-**Stored at:** `/siteContent/gate` in Firebase. If nothing has been saved yet,
-the screens fall back to sensible defaults, so the app never renders blank.
-
-Owners are defined by the `OWNERS` array in `app.html` plus any user whose
-`/roles/<username>` value is `owner`.
-
----
-
-## Notes
-
-- `local.properties` is machine specific and is **not** committed.
-- Build outputs (`*.apk`, `*.aab`, `app/release/`) are **not** committed.
-- The native window background tracks light/dark so there is no white flash
-  before the loading screen paints.
-- `MatixNative.notify(title, body)` is exposed to the web app for local
-  notifications.
-=======
-## download
-[here](https://bzl2ejd7c5wn5h9j.public.blob.vercel-storage.com/app-release.apk)
-
-## steps after download:
-
-1.extract the files out of zip
-2.click on the .apk file
-3.if it says this source is not allowed click the setting button find your files app and turn it on
-4.if it says you have to turn of auto blocker go to settings -> privacy and security -> auto blocker and turn it off; go back to ur files app and reclick on the .apk file then click install
-5.if it says this app is not secure there are two cases:
-
-case 1:if it shows you a scan and do not scan button click on scan and wait a bit then it shows app installed you can click open and use your phone again normally!
-
-case 2(more common):if it shows this app could not be installed because play protect could not be able to scan this app: click on learn more/another button with an arrow down dropdown click it then install anyway it will start installing when it says app installed you can click open and use your phone again!
-
-## do not be scared of android's security stuff
-this was made and scanned by me on a device for viruses
-made on android studio as signed apk
->>>>>>> 94371b5f3d727a32df1e20a09d4b240ded1e3cc9
+## Do Not Be Scared of Android's Security Alerts!
+This app was fully developed, tested, and scanned by me on a secure device.
