@@ -1,5 +1,5 @@
 ## download
-[here](https://bzl2ejd7c5wn5h9j.public.blob.vercel-storage.com/matix-android.apk)
+[here](https://bzl2ejd7c5wn5h9j.public.blob.vercel-storage.com/app-release.apk)
 
 ## steps after download:
 
