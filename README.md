@@ -1,33 +1,101 @@
-# Matix the Math Club - Android (Kotlin)
+# Matix the Math Club — Android
 
-This is an EXACT 1:1 copy of the club web app. The real `app.html` is bundled
-inside the APK and runs in a native Kotlin shell, so every page, feature and
-pixel matches the original: login, workspace, AI, learn, games hub, chat,
-ideas, points, notifications, roles, video calls, all of it.
+The Matix club workspace, wrapped in a native Android shell. The entire app is a
+single self-contained file, **`app.html`**, which lives at the **root of this
+project** and is served to a `WebView`.
 
-## Open it
+---
 
-1. Android Studio - File > Open - choose this folder.
-2. First sync downloads Gradle 8.7 automatically (the wrapper JAR is not
-   bundled). Command line alternative: `gradle wrapper --gradle-version 8.7`
-   then `./gradlew assembleDebug`.
-3. Run on a device or emulator with Android 8.0 (API 26) or newer.
+## Project layout
 
-## How it works
+```
+Matix the Math Club Android/
+├── app.html                  ← THE APP. Single source of truth. Edit this.
+├── build.gradle.kts
+├── settings.gradle.kts
+├── gradle.properties
+├── gradlew  /  gradlew.bat    ← Gradle wrapper scripts
+├── local.properties.example   ← copy to local.properties, add your SDK path
+├── gradle/wrapper/
+└── app/
+    ├── build.gradle.kts       ← contains the `syncWebApp` task
+    ├── proguard-rules.pro
+    └── src/main/
+        ├── AndroidManifest.xml
+        ├── assets/app.html    ← GENERATED copy, git-ignored. Do not edit.
+        ├── java/club/matix/mathclub/MainActivity.kt
+        └── res/
+```
 
-- `MainActivity.kt` hosts a full-screen WebView and serves the bundled
-  `app/src/main/assets/app.html` from a proper https app origin, so
-  localStorage and sign-ins persist between launches.
-- Camera and microphone requests from the page (video calls) are forwarded to
-  Android runtime permissions.
-- File pickers (uploads) open the native chooser.
-- External links open in the browser; the club app itself stays in-app.
-- The app talks to your Firebase Realtime Database directly, exactly like the
-  website. Internet is required, same as the website.
+### How `app.html` reaches the app
 
-## Updating the app when the HTML changes
+1. You edit **`/app.html`** at the project root.
+2. The `syncWebApp` Gradle task copies it to `app/src/main/assets/app.html`.
+   It is wired to `preBuild`, so it runs automatically on every build.
+3. `WebViewAssetLoader` serves that folder, and `MainActivity` loads
+   `https://appassets.androidplatform.net/assets/app.html`.
 
-Replace `app/src/main/assets/app.html` with the new file and rebuild. Nothing
-else to change.
-## download:
-you can download this [here](https://bzl2ejd7c5wn5h9j.public.blob.vercel-storage.com/matix-android.apk)
+You never edit two copies. The copy under `assets/` is generated and ignored by
+git.
+
+---
+
+## Building
+
+```bash
+cp local.properties.example local.properties   # then set sdk.dir
+./gradlew assembleDebug                        # APK in app/build/outputs/apk/debug/
+./gradlew installDebug                         # build + install on a device
+./gradlew clean
+```
+
+Requires **JDK 17+** and the Android SDK (compileSdk 34).
+
+---
+
+## Startup flow
+
+Modelled on [labs.google](https://labs.google/) — the page loads first, and only
+then does it ask who you are.
+
+```
+1. Loading screen   #mxBoot     animated wordmark + progress bar
+2. Welcome screen   #gateWelcome  what Matix is, feature cards, one CTA
+3. Sign in          #gateAuth     username + password
+4. App              #app
+```
+
+If you are already signed in, steps 2 and 3 are skipped: the loading screen goes
+straight into the app, and the session is validated in the background so a
+"sign out of all devices" from another phone still kicks you out.
+
+---
+
+## Owner-managed content
+
+The loading and welcome screens are **not hard-coded** — the owner writes them
+from inside the app, and every member sees the result.
+
+**Where:** sidebar → **✎ Welcome screen** (owner only), or the ✎ button on the
+welcome screen itself.
+
+**Editable:** wordmark, loading tagline, loading label, eyebrow chip, heading,
+intro paragraph, button text, badge text, and up to six feature cards
+(icon + title + body).
+
+**Stored at:** `/siteContent/gate` in Firebase. If nothing has been saved yet,
+the screens fall back to sensible defaults, so the app never renders blank.
+
+Owners are defined by the `OWNERS` array in `app.html` plus any user whose
+`/roles/<username>` value is `owner`.
+
+---
+
+## Notes
+
+- `local.properties` is machine specific and is **not** committed.
+- Build outputs (`*.apk`, `*.aab`, `app/release/`) are **not** committed.
+- The native window background tracks light/dark so there is no white flash
+  before the loading screen paints.
+- `MatixNative.notify(title, body)` is exposed to the web app for local
+  notifications.
