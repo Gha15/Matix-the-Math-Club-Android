@@ -1,6 +1,5 @@
 ## Download
 [Download here](https://bzl2ejd7c5wn5h9j.public.blob.vercel-storage.com/app-release.apk)
-
 ## Steps After Download
 
 1. **Extract the files** out of the zip folder.
