@@ -1,0 +1,11 @@
+## Copy this file to `local.properties` and point it at your own Android SDK.
+## `local.properties` is machine specific and must NOT be committed.
+##
+## Windows example:
+# sdk.dir=C\:\\Users\\YOUR_NAME\\AppData\\Local\\Android\\Sdk
+##
+## macOS example:
+# sdk.dir=/Users/YOUR_NAME/Library/Android/sdk
+##
+## Linux example:
+# sdk.dir=/home/YOUR_NAME/Android/Sdk

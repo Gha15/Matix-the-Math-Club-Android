@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.Matix" parent="android:Theme.Material.Light.NoActionBar">
+        <!-- Matches the boot screen background so there is no white/grey
+             flash between the launcher and the loading screen. -->
+        <item name="android:windowBackground">@color/bg</item>
+        <item name="android:colorBackground">@color/bg</item>
+    </style>
+</resources>
