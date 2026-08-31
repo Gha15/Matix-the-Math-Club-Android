@@ -1906,6 +1906,245 @@ body.reduce-motion #gate .lg-blob{display:none}
 @media(max-height:620px){.lg-sec{min-height:auto;padding-top:calc(var(--lg-nav-h) + 22px)}}
 </style>
 <script>try{document.documentElement.classList.add('mx-booting');}catch(e){}</script>
+<style id="mxAppCss">
+/* ======================================================================
+   MAIN APP SCREEN - labs.google theme (everything behind sign-in)
+   Loaded last so it wins over the old purple/white theme and body.dark.
+   ====================================================================== */
+body,body.dark{
+  --bg:#0b0b0c; --card:#15151a; --sidebar:#0e0e10; --sidebar2:#1a1a20;
+  --text:#f4f0e7; --muted:rgba(255,255,255,.62);
+  --border:rgba(255,255,255,.13); --hover:rgba(255,255,255,.06); --soft:#101012;
+  --brand:#3ee98f; --brand2:#22c777; --accent:#c9d356;
+  --blue:#3ee98f; --blue-soft:rgba(62,233,143,.12); --green:#3ee98f;
+  --radius:12px;
+  --shadow:0 1px 2px rgba(0,0,0,.5),0 18px 44px rgba(0,0,0,.55);
+}
+body,body.dark{
+  background:#0b0b0c;
+  color:var(--text);
+  font-family:'Google Sans','Product Sans','Google Sans Display',system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+}
+#app{background:#0b0b0c}
+#app ::selection{background:rgba(62,233,143,.28)}
+
+/* faint dotted grid canvas, same as the landing screens */
+#app .content{
+  background-color:#0b0b0c;
+  background-image:radial-gradient(rgba(255,255,255,.075) 1px,transparent 1px);
+  background-size:22px 22px;
+}
+
+/* ------------------------------ sidebar ------------------------------ */
+#app .sidebar,body.dark #app .sidebar{
+  background:#0e0e10;background-image:none;
+  border-right:1px solid rgba(255,255,255,.10);
+}
+#app .ws-name small,#app .sb-foot .u span{color:rgba(255,255,255,.5)}
+#app .nav-item{color:rgba(255,255,255,.72);border-radius:10px}
+#app .nav-item:hover{background:rgba(255,255,255,.06);color:#fff}
+#app .nav-item.active{
+  background:rgba(62,233,143,.13);color:#eafff3;font-weight:600;
+  box-shadow:inset 0 0 0 1px rgba(62,233,143,.28);
+}
+#app .nav-lbl,#app .nav-lbl.nav-sect{
+  color:rgba(255,255,255,.42);font-size:.7rem;
+  letter-spacing:.06em;text-transform:uppercase;
+}
+#app .nav-sep,body.dark #app .nav-sep{background:rgba(255,255,255,.10)}
+#app .sbq,#app .icon-btn,#app .sb-collapse{
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);
+  border-radius:999px;color:#f4f0e7;
+}
+#app .sbq:hover,#app .icon-btn:hover,#app .sb-collapse:hover{background:rgba(255,255,255,.10)}
+#app .sb-newchat{background:#f4f0e7;color:#0b0b0c;border:0;border-radius:999px;font-weight:600}
+#app .sb-newchat:hover{background:#fff}
+#app .ws:hover,#app .wsm-item:hover{background:rgba(255,255,255,.06)}
+#app .ws-menu,body.dark #app .ws-menu{
+  background:#15151a;border:1px solid rgba(255,255,255,.14);border-radius:16px;
+}
+#app .wsm-sep{background:rgba(255,255,255,.10)}
+#app .avatar,#app .ws-logo{border-radius:999px}
+
+/* --------------------------- tabs + titlebar --------------------------- */
+#app .tabstrip,body.dark #app .tabstrip{
+  background:#0b0b0c;border-bottom:1px solid rgba(255,255,255,.10);
+}
+#app .tab,body.dark #app .tab{color:rgba(255,255,255,.6);border-radius:999px}
+#app .tab.active,body.dark #app .tab.active{
+  background:rgba(255,255,255,.07);color:#fff;box-shadow:inset 0 -2px 0 #3ee98f;
+}
+#app .tab-add:hover{background:rgba(62,233,143,.14);color:#3ee98f}
+#app .menu-toggle{background:transparent;border:0;color:#f4f0e7}
+#titlebar{background:#0b0b0c !important;border-bottom:1px solid rgba(255,255,255,.10) !important}
+
+/* ------------------------- cards and panels ------------------------- */
+#app .card,#app .u-card,#app .u-game,#app .pcard,#app .cc-box,
+#modal .modal-card,.palette,
+body.dark #app .card,body.dark #app .u-card,body.dark #app .u-game,
+body.dark #app .pcard,body.dark #app .cc-box,
+body.dark #modal .modal-card,body.dark .palette{
+  background:#15151a !important;
+  border:1px solid rgba(255,255,255,.13) !important;
+  border-radius:18px;
+  color:#f4f0e7 !important;
+}
+#app .card{transition:border-color .16s ease,transform .16s ease,box-shadow .16s ease}
+#app .card:hover{border-color:rgba(255,255,255,.26) !important}
+#app .stat,#app .qa{
+  background:#15151a;border:1px solid rgba(255,255,255,.13);border-radius:16px;
+}
+#app .stat:hover,#app .qa:hover{
+  border-color:#3ee98f;transform:translateY(-2px);
+  box-shadow:0 12px 32px rgba(0,0,0,.55);
+}
+#app .stat .sl{color:rgba(255,255,255,.5)}
+#app .stat .sn{font-weight:600;letter-spacing:-.03em}
+#app .sec-h h2{font-weight:600;letter-spacing:-.02em}
+#app .u-stat,body.dark #app .u-stat{
+  background:linear-gradient(135deg,rgba(62,233,143,.14),rgba(201,211,86,.10));
+}
+#app .u-card.owner,body.dark #app .u-card.owner{
+  background:#15151a !important;border-color:rgba(201,211,86,.45) !important;
+}
+#app .seg,body.dark #app .seg{background:rgba(255,255,255,.05);border-radius:999px}
+#app .seg button{color:rgba(255,255,255,.6);border-radius:999px}
+#app .seg button.active,body.dark #app .seg button.active{background:rgba(255,255,255,.10);color:#fff}
+#app .empty,body.dark #app .empty{color:rgba(255,255,255,.5)}
+
+/* ----------------------------- buttons ----------------------------- */
+#app .btn,#modal .btn,.palette .btn{
+  background:#f4f0e7 !important;color:#0b0b0c !important;
+  border:0 !important;border-radius:999px;font-weight:600;box-shadow:none !important;
+}
+#app .btn:hover,#modal .btn:hover{background:#fff !important;filter:none}
+#app .btn.ghost,#modal .btn.ghost{
+  background:transparent !important;color:#f4f0e7 !important;
+  border:1px solid rgba(255,255,255,.26) !important;
+}
+#app .btn.ghost:hover,#modal .btn.ghost:hover{background:rgba(255,255,255,.08) !important}
+#app .btn.accent,#modal .btn.accent{background:#3ee98f !important;color:#06281a !important}
+#app .chip,body.dark #app .chip{
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.16);
+  color:rgba(255,255,255,.72);border-radius:999px;
+}
+#app .chip:hover{background:rgba(255,255,255,.10);color:#fff}
+#app .chip.active,body.dark #app .chip.active{
+  background:#3ee98f !important;border-color:transparent !important;
+  color:#06281a !important;box-shadow:none !important;
+}
+
+/* ------------------------------ inputs ------------------------------ */
+#app input,#app textarea,#app select,
+#modal input,#modal textarea,#modal select,
+.palette input,.palette .pin input,
+body.dark #app input,body.dark #app textarea,body.dark #app select{
+  background:#101014 !important;
+  border:1px solid rgba(255,255,255,.16) !important;
+  color:#f4f0e7 !important;border-radius:12px;
+}
+#app input:focus,#app textarea:focus,#app select:focus,
+#modal input:focus,#modal textarea:focus,#modal select:focus,.palette input:focus{
+  border-color:#3ee98f !important;
+  box-shadow:0 0 0 3px rgba(62,233,143,.18) !important;outline:none;
+}
+#app input::placeholder,#app textarea::placeholder,
+#modal input::placeholder,.palette input::placeholder,
+body.dark #app input::placeholder{color:rgba(255,255,255,.38)}
+
+/* --------------------- overlays, toasts, scrollbars --------------------- */
+.overlay,#modal{background:rgba(6,6,8,.74)}
+.toast,body.dark .toast{
+  background:#15151a !important;border:1px solid rgba(255,255,255,.14);
+  color:#f4f0e7;border-radius:14px;
+}
+.toast.ok,body.dark .toast.ok{background:#0f2a1d !important;border-color:rgba(62,233,143,.42)}
+.toast.err,body.dark .toast.err{background:#2a1414 !important;border-color:rgba(229,100,88,.45)}
+#app .content::-webkit-scrollbar{width:10px;height:10px}
+#app .content::-webkit-scrollbar-track{background:transparent}
+#app .content::-webkit-scrollbar-thumb{background:rgba(255,255,255,.14);border-radius:999px}
+#app .content::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,.24)}
+#app button:focus-visible,#app a:focus-visible,#app input:focus-visible{
+  outline:2px solid #3ee98f;outline-offset:3px;
+}
+/* game boards stay on white so the games still read correctly */
+#app .stage,body.dark #app .stage{background:#fff}
+
+/* ======================================================================
+   Chrome that lives OUTSIDE #app - confirm dialog, floating dock,
+   settings panel, title bar. These were the bits still showing purple.
+   ====================================================================== */
+
+/* ---- confirm / alert dialog (#ccModal) ---- */
+.cc-modal,body.dark .cc-modal{background:rgba(6,6,8,.74);backdrop-filter:blur(6px)}
+.cc-box,body.dark .cc-box{
+  background:#15151a !important;
+  border:1px solid rgba(255,255,255,.14) !important;
+  border-radius:20px !important;color:#f4f0e7 !important;
+  box-shadow:0 24px 60px rgba(0,0,0,.6) !important;
+}
+/* the old purple accent strip along the dialog's top edge */
+.cc-box:before,.cc-box::before{
+  background:linear-gradient(90deg,#3ee98f,#c9d356) !important;
+}
+.cc-modal .btn,#ccModal .btn{
+  background:#f4f0e7 !important;color:#0b0b0c !important;
+  border:0 !important;border-radius:999px !important;
+  font-weight:600;box-shadow:none !important;background-image:none !important;
+}
+.cc-modal .btn:hover,#ccModal .btn:hover{background:#fff !important}
+.cc-modal .btn.ghost,#ccModal .btn.ghost,
+.cc-modal #ccCancel,#ccModal #ccCancel{
+  background:transparent !important;color:#f4f0e7 !important;
+  border:1px solid rgba(255,255,255,.26) !important;background-image:none !important;
+}
+.cc-modal .btn.ghost:hover,#ccModal #ccCancel:hover{background:rgba(255,255,255,.08) !important}
+/* destructive actions stay red so they still read as a warning */
+#app .btn.danger,#modal .btn.danger,.cc-modal .btn.danger,#ccModal .btn.danger{
+  background:#e56458 !important;color:#2a0b07 !important;background-image:none !important;
+}
+#app .btn.danger:hover,#ccModal .btn.danger:hover{background:#ef7062 !important}
+
+/* ---- floating dock (bottom nav) ---- */
+.lb-dock,body.dark .lb-dock{
+  background:rgba(17,17,20,.78) !important;
+  border:1px solid rgba(255,255,255,.14) !important;
+  box-shadow:0 14px 40px rgba(0,0,0,.55) !important;
+}
+.lb-dock button{color:#f4f0e7}
+.lb-dock button small{color:rgba(255,255,255,.55)}
+.lb-dock button:hover,body.dark .lb-dock button:hover{background:rgba(255,255,255,.10)}
+.lb-dock button.on{
+  background:rgba(62,233,143,.16) !important;background-image:none !important;
+  box-shadow:inset 0 0 0 1px rgba(62,233,143,.3);
+}
+.lb-dock button.on small{color:#eafff3}
+
+/* ---- title bar + its settings panel ---- */
+.titlebar,body.dark .titlebar{
+  background:#0b0b0c !important;background-image:none !important;
+  color:#f4f0e7 !important;border-bottom:1px solid rgba(255,255,255,.10);
+}
+.titlebar button,.titlebar .tb-btn{color:#f4f0e7}
+.tb-panel,body.dark .tb-panel{
+  background:#15151a !important;border:1px solid rgba(255,255,255,.14) !important;
+  border-radius:18px !important;color:#f4f0e7 !important;
+  box-shadow:0 24px 60px rgba(0,0,0,.6) !important;
+}
+.tb-panel .set-item,.set-item{color:#f4f0e7;border-radius:10px}
+.tb-panel .set-item:hover,.set-item:hover{background:rgba(255,255,255,.06)}
+.u5-val{color:rgba(255,255,255,.55)}
+.u5-segs,.u5-keys{color:#f4f0e7}
+.u5-seg{
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.16);
+  color:rgba(255,255,255,.7);border-radius:999px;
+}
+.u5-seg.on,.u5-seg.active{background:#3ee98f !important;color:#06281a !important;border-color:transparent !important}
+#u5Find{
+  background:#101014 !important;border:1px solid rgba(255,255,255,.16) !important;
+  color:#f4f0e7 !important;border-radius:12px;
+}
+</style>
 </head>
 <body>
 <div id="mxBoot" role="status" aria-live="polite" aria-label="Loading Matix">
